@@ -1,7 +1,6 @@
 package com.github.xenteros.service;
 
 import com.github.xenteros.dto.StudentDTO;
-import com.github.xenteros.model.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 @Service
 public interface StudentService {
 
-    List<Student> findAll();
-    Student findOne(String uuid);
-    Student create(StudentDTO studentDTO);
+    List<StudentDTO> findAll();
+    StudentDTO findOne(String uuid);
+    StudentDTO create(StudentDTO studentDTO);
 }
