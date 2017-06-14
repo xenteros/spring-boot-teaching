@@ -1,6 +1,7 @@
 package com.github.xenteros.service.impl;
 
 import com.github.xenteros.dto.StudentDTO;
+import com.github.xenteros.mapper.StudentMapper;
 import com.github.xenteros.model.Student;
 import com.github.xenteros.repository.StudentRepository;
 import com.github.xenteros.service.StudentService;
@@ -19,24 +20,25 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private StudentMapper studentMapper;
+
     @Override
-    public List<Student> findAll() {
-        return studentRepository.findAll();
+    public List<StudentDTO> findAll() {
+        return studentMapper.toStudentDTOList(studentRepository.findAll());
     }
 
     @Override
-    public Student findOne(String uuid) {
-        return studentRepository.findOneByUuid(uuid);
+    public StudentDTO findOne(String uuid) {
+        return studentMapper.toStudentDTO(studentRepository.findOneByUuid(uuid));
     }
 
     @Override
-    public Student create(StudentDTO studentDTO) {
+    public StudentDTO create(StudentDTO studentDTO) {
 
-        Student newStudent = new Student();
-        newStudent.setFirstName(studentDTO.getFirstName());
-        newStudent.setLastName(studentDTO.getLastName());
+        Student newStudent = studentMapper.toStudent(studentDTO);
         newStudent.setUuid(UUID.randomUUID().toString());
 
-        return studentRepository.save(newStudent);
+        return studentMapper.toStudentDTO(studentRepository.save(newStudent));
     }
 }
