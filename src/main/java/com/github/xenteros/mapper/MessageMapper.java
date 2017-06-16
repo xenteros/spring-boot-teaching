@@ -3,7 +3,6 @@ package com.github.xenteros.mapper;
 import com.github.xenteros.dto.MessageDTO;
 import com.github.xenteros.model.Message;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -13,12 +12,9 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {StudentMapper.class})
 public interface MessageMapper {
 
-    @Mapping(target = "from", ignore = true)
-    @Mapping(target = "to", ignore = true)
+
     Message toMessage(MessageDTO messageDTO);
 
-    @Mapping(target = "from", ignore = true)
-    @Mapping(target = "to", ignore = true)
     MessageDTO toMessageDTO(Message message);
 
     List<Message> toMessageList(List<MessageDTO> list);
