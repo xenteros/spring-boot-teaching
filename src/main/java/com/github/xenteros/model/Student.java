@@ -1,9 +1,8 @@
 package com.github.xenteros.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by agurgul on 13.06.2017.
@@ -20,6 +19,9 @@ public class Student {
     private String lastName;
 
     private String uuid;
+
+    @OneToMany(mappedBy = "from", cascade = {CascadeType.ALL})
+    private List<Message> messagesSent = new ArrayList<>();
 
     public Student() {
     }
@@ -54,5 +56,13 @@ public class Student {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public List<Message> getMessagesSent() {
+        return messagesSent;
+    }
+
+    public void setMessagesSent(List<Message> messagesSent) {
+        this.messagesSent = messagesSent;
     }
 }
